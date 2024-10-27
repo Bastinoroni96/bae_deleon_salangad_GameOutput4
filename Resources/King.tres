@@ -7,13 +7,14 @@
 [resource]
 script = ExtResource("2_ogrtb")
 title = "King"
-type = "Enemy"
+CharacterType = "Enemy"
 icon = ExtResource("1_n0lww")
 fight = ExtResource("1_n0lww")
 attacking = ExtResource("1_n0lww")
 dead = ExtResource("1_n0lww")
 agility = 12
-health = 50
+health = 200
+max_health = 200
 mana = 0
-shield = 0
+stamina = 0
 vfx_node = ExtResource("3_iepy4")

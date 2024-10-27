@@ -2,7 +2,7 @@ extends Resource
 class_name Character
 
 @export var title : String
-@export var type : String
+@export var CharacterType : String
 @export var icon : Texture2D
 @export var fight : Texture2D
 @export var attacking : Texture2D
@@ -40,7 +40,7 @@ func tween_movement(shift, tree):
 #
 func attack(tree):
 	var shift = Vector2()
-	if type == "Enemy":
+	if CharacterType == "Enemy":
 		shift = Vector2(-30,0)
 	else:
 		shift = Vector2(30,0)
@@ -68,7 +68,20 @@ func add_vfx(type : String = ""):
 #
 #
 func get_attacked(type = ""):
+	if type == "Slash":
+		#deal damage between 10 to 20
+		var SlashDamage = 10 + randi() % 11
+		health -= SlashDamage
+	
+	if (health <= 0) and (CharacterType == 'Player'):
+		print('end game')
+		node.texture = dead
+	elif (health <= 0) and (CharacterType == 'Enemy'):
+		print('killed enemy')
+		
+	node.updateHealth(health)
 	add_vfx(type)
+	
 #
 #
 func set_status(status_type : String):
@@ -78,12 +91,15 @@ func set_status(status_type : String):
 			status = 0.5
 		"Slow":
 			status = 2
+		"Heal":
+			health += 20
+			node.updateHealth(health)
 	
-	print(queue)
-	for i in range(3):
-		queue.pop_back()
-	print(queue)
-	
-	for i in range(3):
-		queue.append(queue[-1] + speed * status)
-	print(queue)
+	#print(queue)
+	#for i in range(3):
+		#queue.pop_back()
+	#print(queue)
+	#
+	#for i in range(3):
+		#queue.append(queue[-1] + speed * status)
+	#print(queue)

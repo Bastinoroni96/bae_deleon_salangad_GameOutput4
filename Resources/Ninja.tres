@@ -7,13 +7,14 @@
 [resource]
 script = ExtResource("2_cp1c3")
 title = "Ninja"
-type = "Enemy"
+CharacterType = "Enemy"
 icon = ExtResource("1_yw3jw")
 fight = ExtResource("1_yw3jw")
 attacking = ExtResource("1_yw3jw")
 dead = ExtResource("1_yw3jw")
 agility = 11
-health = 0
+health = 100
+max_health = 100
 mana = 0
-shield = 0
+stamina = 0
 vfx_node = ExtResource("3_5u1kw")

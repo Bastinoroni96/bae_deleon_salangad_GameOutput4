@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyqavs8rppsjs"]
+
+[ext_resource type="Script" path="res://Scripts/player_button.gd" id="1_eusvt"]
+
+[node name="player_button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_eusvt")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

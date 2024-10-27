@@ -1,15 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://duwfsfkvuii6"]
+[gd_scene load_steps=14 format=3 uid="uid://duwfsfkvuii6"]
 
 [ext_resource type="Script" path="res://Scripts/characterSprite.gd" id="1_6wi2a"]
 [ext_resource type="Script" path="res://Scripts/battle_scene.gd" id="1_oby22"]
 [ext_resource type="Script" path="res://Scripts/attack.gd" id="2_ii6ar"]
 [ext_resource type="PackedScene" uid="uid://b7m1bbwxt6a7" path="res://Scenes/enemy_button.tscn" id="2_owy2f"]
 [ext_resource type="Resource" uid="uid://dq571dx5stqdd" path="res://Resources/Red.tres" id="3_5xjff"]
+[ext_resource type="PackedScene" uid="uid://cyqavs8rppsjs" path="res://Scenes/player_button.tscn" id="3_83cox"]
 [ext_resource type="Resource" uid="uid://cuna0u7rxwm06" path="res://Resources/Blue.tres" id="4_0t88b"]
 [ext_resource type="Resource" uid="uid://dn6tfxue77qsx" path="res://Resources/King.tres" id="5_54p65"]
 [ext_resource type="Script" path="res://Scripts/haste.gd" id="5_l44r5"]
+[ext_resource type="Script" path="res://Scripts/heal.gd" id="6_0v52m"]
 [ext_resource type="Resource" uid="uid://0i41ujftm4ku" path="res://Resources/Ninja.tres" id="6_u62cd"]
-[ext_resource type="Texture2D" uid="uid://cg6wybgheou6b" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
+[ext_resource type="Texture2D" uid="uid://cbfe5807vpy0" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
 [ext_resource type="PackedScene" uid="uid://vlbo2larrbvd" path="res://health_bar.tscn" id="10_ckf4r"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "options")]
@@ -20,6 +22,7 @@ enemy_group = NodePath("Enemies")
 timeline = NodePath("UI/Timeline")
 options = NodePath("UI/Options")
 enemy_button = ExtResource("2_owy2f")
+player_button = ExtResource("3_83cox")
 
 [node name="GridBg" type="Sprite2D" parent="."]
 position = Vector2(582, 365)
@@ -109,7 +112,29 @@ text = "Haste
 "
 script = ExtResource("5_l44r5")
 
+[node name="Heal" type="Button" parent="UI/Options"]
+layout_mode = 2
+text = "Heal"
+script = ExtResource("6_0v52m")
+
 [node name="EnemySelection" type="VBoxContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(20, 0)
+
+[node name="PlayerSelction" type="VBoxContainer" parent="UI"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 8
@@ -183,3 +208,4 @@ offset_bottom = 41.0
 
 [connection signal="pressed" from="UI/Options/Attack" to="UI/Options/Attack" method="_on_pressed"]
 [connection signal="pressed" from="UI/Options/Haste" to="UI/Options/Haste" method="_on_pressed"]
+[connection signal="pressed" from="UI/Options/Heal" to="UI/Options/Heal" method="_on_pressed"]

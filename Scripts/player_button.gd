@@ -1,5 +1,3 @@
-# this is when the enemy is damaged
-
 extends Button
 
 @export var character : Character:
@@ -8,8 +6,9 @@ extends Button
 		text = value.title
 
 func _on_pressed():
-	character.get_attacked("Slash")
+
+	character.set_status("Heal")
 	get_parent().hide()
-	get_parent().owner.update_announcement(text)
-	get_parent().owner.attack()
+	get_parent().owner.update_announcement(text,"Heal")
 	get_parent().owner.pop_out()
+	get_parent().owner.next_attack()

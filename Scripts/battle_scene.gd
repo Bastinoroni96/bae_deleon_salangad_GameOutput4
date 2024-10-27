@@ -7,13 +7,23 @@ extends Node2D
 @export var options : VBoxContainer
 @export var enemy_button : PackedScene
 #
+#
+@export var player_button : PackedScene
+#
 var sorted_array = []
 var players : Array[Character]
 var enemies : Array[Character]
 
+# notes for damages ====
+# slash == 10-20 (also for enemies)
+
 func _ready():
 	for player in player_group.get_children():
 		players.append(player.character)
+		
+		var PlayerButton = player_button.instantiate()
+		PlayerButton.character = player.character
+		%PlayerSelction.add_child(PlayerButton)
 	#
 	for enemy in enemy_group.get_children():
 		enemies.append(enemy.character)
@@ -76,10 +86,9 @@ func next_attack():
 		return
 	var playerHit = players.pick_random()
 	update_announcement(playerHit.title)
-	print('asd')
 	attack()
 	pop_out()
-	playerHit.get_attacked()
+	playerHit.get_attacked("Slash")
 	
 #
 func set_status(status_type):
@@ -95,6 +104,16 @@ func choose_enemy():
 	%EnemySelection.show()
 	%EnemySelection.get_child(0).grab_focus()
 
-func update_announcement(defender):
+func choose_player():
+	%PlayerSelction.show()
+	%PlayerSelction.get_child(0).grab_focus()
+
+
+func update_announcement(defender, type : String = ""):
 	var attacker = sorted_array[0]["character"].title
+	if (type == "Haste"):
+		%Announcement.text = str(attacker) + " cast Haste on himself "
+	elif (type == "Heal"):
+		%Announcement.text = str(attacker) + " healed " + str(defender)
+		
 	%Announcement.text = str(attacker) + " attacked " + str(defender)

@@ -10,13 +10,14 @@
 [resource]
 script = ExtResource("3_cpduq")
 title = "Blue"
-type = "Player"
+CharacterType = "Player"
 icon = ExtResource("2_wa663")
 fight = ExtResource("1_dvhrt")
 attacking = ExtResource("1_nuese")
 dead = ExtResource("2_k18u5")
 agility = 17
 health = 50
+max_health = 50
 mana = 0
-shield = 0
+stamina = 0
 vfx_node = ExtResource("4_1p0ah")
