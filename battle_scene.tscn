@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvhwiu6tgedcf"]
+[gd_scene load_steps=12 format=3 uid="uid://duwfsfkvuii6"]
 
 [ext_resource type="Script" path="res://Scripts/characterSprite.gd" id="1_6wi2a"]
 [ext_resource type="Script" path="res://Scripts/battle_scene.gd" id="1_oby22"]
@@ -9,7 +9,8 @@
 [ext_resource type="Resource" uid="uid://dn6tfxue77qsx" path="res://Resources/King.tres" id="5_54p65"]
 [ext_resource type="Script" path="res://Scripts/haste.gd" id="5_l44r5"]
 [ext_resource type="Resource" uid="uid://0i41ujftm4ku" path="res://Resources/Ninja.tres" id="6_u62cd"]
-[ext_resource type="Texture2D" uid="uid://cbfe5807vpy0" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
+[ext_resource type="Texture2D" uid="uid://cg6wybgheou6b" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
+[ext_resource type="PackedScene" uid="uid://vlbo2larrbvd" path="res://health_bar.tscn" id="10_ckf4r"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "options")]
 position = Vector2(-6, -78)
@@ -145,12 +146,16 @@ flip_h = true
 script = ExtResource("1_6wi2a")
 character = ExtResource("3_5xjff")
 
+[node name="HealthBar" parent="Players/Player" instance=ExtResource("10_ckf4r")]
+
 [node name="Player2" type="Sprite2D" parent="Players"]
 position = Vector2(14.3333, 134.667)
 rotation = -0.0109053
 flip_h = true
 script = ExtResource("1_6wi2a")
 character = ExtResource("4_0t88b")
+
+[node name="HealthBar" parent="Players/Player2" instance=ExtResource("10_ckf4r")]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(828, 177)
@@ -161,12 +166,20 @@ scale = Vector2(2, 2)
 script = ExtResource("1_6wi2a")
 character = ExtResource("5_54p65")
 
+[node name="HealthBar" parent="Enemies/Enemy1" instance=ExtResource("10_ckf4r")]
+offset_top = 9.0
+offset_bottom = 36.0
+
 [node name="Enemy2" type="Sprite2D" parent="Enemies"]
 position = Vector2(-78, 456)
 scale = Vector2(1.5, 1.5)
 flip_h = true
 script = ExtResource("1_6wi2a")
 character = ExtResource("6_u62cd")
+
+[node name="HealthBar" parent="Enemies/Enemy2" instance=ExtResource("10_ckf4r")]
+offset_top = 14.0
+offset_bottom = 41.0
 
 [connection signal="pressed" from="UI/Options/Attack" to="UI/Options/Attack" method="_on_pressed"]
 [connection signal="pressed" from="UI/Options/Haste" to="UI/Options/Haste" method="_on_pressed"]

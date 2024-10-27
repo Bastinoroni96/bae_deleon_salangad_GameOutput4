@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://clrqpdndwtku5"]
 
-[ext_resource type="Texture2D" uid="uid://kgov85bkssob" path="res://Assets/VFX/BigSlashV.png" id="1_d8bc4"]
-[ext_resource type="AudioStream" uid="uid://cu26v40rij5by" path="res://Assets/SFX/mixkit-fast-sword-whoosh-2792.wav" id="2_r6yuc"]
+[ext_resource type="Texture2D" uid="uid://m51yqqam3s5b" path="res://Assets/VFX/BigSlashV.png" id="1_d8bc4"]
+[ext_resource type="AudioStream" uid="uid://2ytaaoq4e2td" path="res://Assets/SFX/mixkit-fast-sword-whoosh-2792.wav" id="2_r6yuc"]
 
 [sub_resource type="Animation" id="Animation_x1d0t"]
 resource_name = "slash"

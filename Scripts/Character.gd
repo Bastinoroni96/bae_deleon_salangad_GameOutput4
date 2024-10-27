@@ -2,7 +2,7 @@ extends Resource
 class_name Character
 
 @export var title : String
-@export var Charactertype : String
+@export var type : String
 @export var icon : Texture2D
 @export var fight : Texture2D
 @export var attacking : Texture2D
@@ -13,8 +13,9 @@ class_name Character
 		speed = 200.0 / (log(agility) + 2) - 25
 		queue_reset()
 @export var health : int
+@export var max_health : int = 100  # Set the maximum health
 @export var mana : int
-@export var shield : int
+@export var stamina : int
 
 @export var vfx_node : PackedScene = preload("res://Scenes/vfx.tscn")
 var speed: float
@@ -39,11 +40,11 @@ func tween_movement(shift, tree):
 #
 func attack(tree):
 	var shift = Vector2()
-	if Charactertype == "Enemy":
+	if type == "Enemy":
 		shift = Vector2(-30,0)
 	else:
 		shift = Vector2(30,0)
-	node.texture = attacking
+	node.texture = icon
 	if node.position.x < node.get_viewport_rect().size.x/2:
 		shift = -shift
 	
@@ -78,10 +79,11 @@ func set_status(status_type : String):
 		"Slow":
 			status = 2
 	
-	#print(queue)
-	#for i in range(3):
-		#queue.pop_back()
-	#print(queue)
-	#for i in range(3):
-		#queue.append(queue[-1] + speed * status)
-	#print(queue)
+	print(queue)
+	for i in range(3):
+		queue.pop_back()
+	print(queue)
+	
+	for i in range(3):
+		queue.append(queue[-1] + speed * status)
+	print(queue)
