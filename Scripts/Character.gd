@@ -100,8 +100,10 @@ func get_attacked(type = ""):
 
 
 	elif (health <= 0) and (CharacterType == 'Enemy'):
-		print('killed enemy')
-		#EventBus.dead_enemy.emit()
+		
+		EventBus.emit_dead_enemy(title)
+		if title == 'King':
+			node.openMenu("Victory")
 		#node.queue_free()
 		
 		
@@ -124,6 +126,9 @@ func set_status(status_type : String):
 			if shield == 0:
 				shield = 1
 				node.showShield()
+		"Dead":
+			
+			status = -1000000000
 	
 	#print(queue)
 	#for i in range(3):

@@ -34,7 +34,9 @@ func _ready():
 	#
 	sort_and_display()
 	EventBus.next_attack.connect(next_attack)
-	#EventBus.dead_enemy.connect(dead_enemy)
+	
+	EventBus.connect("dead_enemy", Callable(self, "dead_enemy"))
+
 	#
 	next_attack()
 #
@@ -80,7 +82,6 @@ func pop_out():
 #
 func attack():
 	sorted_array[0]["character"].attack(get_tree())
-	#dead_enemy()
 #
 #
 func next_attack():
@@ -98,6 +99,7 @@ func next_attack():
 			sorted_array[0]["character"].resetMoon()
 			sorted_array[0]["character"].updateCooldown("Doom")
 		else:
+			playerHit.get_attacked("Slash")
 			sorted_array[0]["character"].updateMoon()
 	else:
 		playerHit.get_attacked("Slash")
@@ -160,17 +162,41 @@ func update_announcement(defender, type : String = ""):
 	else:
 		%Announcement.text = str(attacker) + " attacked " + str(defender)
 
-func dead_enemy():
-	var deadNinja = %EnemySelection.get_child(1)
-	%EnemySelection.remove_child(deadNinja)
-	deadNinja.queue_free()
-	
-	
+func dead_enemy(title: String):
+	#print(enemy_group.get_children())
+	#for enemySelect in %EnemySelection.get_children():
+		#enemySelect.queue_free()
+		
+	for i in (enemy_group.get_children().size()):
+		if (enemy_group.get_children()[i]["character"].title) == title:
+			enemies.remove_at(i)
+			#enemy_group.remove_at(i)
+			enemy_group.get_children()[i].queue_free()
+			%EnemySelection.get_children()[i].queue_free()
+			#enemy.queue_free()
+			#enemies.remove_at(i)
+		
 	#for enemy in enemy_group.get_children():
-		#print(enemy.character)
-		#enemies.append(enemy.character)
-		##
+		#print(enemy)
 		#var button = enemy_button.instantiate()
 		#button.character = enemy.character
 		#%EnemySelection.add_child(button)
+	#await get_tree().create_timer(.1).timeout
+	#print(enemies)
+	#print(enemy_group.get_children().size())
+	#await (get_tree(), "idle_frame")
+	await get_tree().create_timer(.1).timeout
+
+	#print(enemy_group.get_children())
+	#for enemy in enemy_group.get_children():
+		#print(enemy_group)
+	#print(enemies.)
+			
+		#print(enemy["character"].title)
+		
+		#
+		#var button = enemy_button.instantiate()
+		#button.character = enemy.character
+		#%EnemySelection.add_child(button)
+	#print(enemy_group)
 	sort_and_display()
