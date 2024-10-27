@@ -1,15 +1,19 @@
-[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://0i41ujftm4ku"]
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://0i41ujftm4ku"]
 
-[ext_resource type="Texture2D" uid="uid://dqbjorq5fvvbr" path="res://Assets/Enemies/Ninja/World01_007_Pirate.png" id="1_f4rup"]
+[ext_resource type="Texture2D" uid="uid://dqbjorq5fvvbr" path="res://Assets/Enemies/Ninja/World01_007_Pirate.png" id="1_yw3jw"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="2_cp1c3"]
+[ext_resource type="PackedScene" uid="uid://clrqpdndwtku5" path="res://Scenes/vfx.tscn" id="3_5u1kw"]
 
 [resource]
 script = ExtResource("2_cp1c3")
 title = "Ninja"
 type = "Enemy"
-icon = ExtResource("1_f4rup")
-fight = ExtResource("1_f4rup")
+icon = ExtResource("1_yw3jw")
+fight = ExtResource("1_yw3jw")
+attacking = ExtResource("1_yw3jw")
+dead = ExtResource("1_yw3jw")
 agility = 11
 health = 0
 mana = 0
-stamina = 0
+shield = 0
+vfx_node = ExtResource("3_5u1kw")

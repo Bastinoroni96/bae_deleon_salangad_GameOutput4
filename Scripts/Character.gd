@@ -2,7 +2,7 @@ extends Resource
 class_name Character
 
 @export var title : String
-@export var type : String
+@export var Charactertype : String
 @export var icon : Texture2D
 @export var fight : Texture2D
 @export var attacking : Texture2D
@@ -14,7 +14,7 @@ class_name Character
 		queue_reset()
 @export var health : int
 @export var mana : int
-@export var stamina : int
+@export var shield : int
 
 @export var vfx_node : PackedScene = preload("res://Scenes/vfx.tscn")
 var speed: float
@@ -39,11 +39,11 @@ func tween_movement(shift, tree):
 #
 func attack(tree):
 	var shift = Vector2()
-	if type == "Enemy":
+	if Charactertype == "Enemy":
 		shift = Vector2(-30,0)
 	else:
 		shift = Vector2(30,0)
-	node.texture = icon
+	node.texture = attacking
 	if node.position.x < node.get_viewport_rect().size.x/2:
 		shift = -shift
 	
@@ -63,6 +63,7 @@ func add_vfx(type : String = ""):
 	node.add_child(vfx)
 	if type == "":
 		return
+	print(type)
 	vfx.find_child("AnimationPlayer").play(type)
 #
 #
@@ -82,7 +83,6 @@ func set_status(status_type : String):
 	for i in range(3):
 		queue.pop_back()
 	print(queue)
-	
 	for i in range(3):
 		queue.append(queue[-1] + speed * status)
 	print(queue)

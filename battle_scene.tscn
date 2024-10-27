@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvhwiu6tgedcf"]
+[gd_scene load_steps=11 format=3 uid="uid://cvhwiu6tgedcf"]
 
 [ext_resource type="Script" path="res://Scripts/characterSprite.gd" id="1_6wi2a"]
 [ext_resource type="Script" path="res://Scripts/battle_scene.gd" id="1_oby22"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dq571dx5stqdd" path="res://Resources/Red.tres" id="3_5xjff"]
 [ext_resource type="Resource" uid="uid://cuna0u7rxwm06" path="res://Resources/Blue.tres" id="4_0t88b"]
 [ext_resource type="Resource" uid="uid://dn6tfxue77qsx" path="res://Resources/King.tres" id="5_54p65"]
+[ext_resource type="Script" path="res://Scripts/haste.gd" id="5_l44r5"]
 [ext_resource type="Resource" uid="uid://0i41ujftm4ku" path="res://Resources/Ninja.tres" id="6_u62cd"]
 [ext_resource type="Texture2D" uid="uid://cbfe5807vpy0" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
 
@@ -81,7 +82,6 @@ offset_bottom = 40.0
 expand_mode = 1
 
 [node name="Options" type="VBoxContainer" parent="UI"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -102,6 +102,12 @@ layout_mode = 2
 text = "Attack"
 script = ExtResource("2_ii6ar")
 
+[node name="Haste" type="Button" parent="UI/Options"]
+layout_mode = 2
+text = "Haste
+"
+script = ExtResource("5_l44r5")
+
 [node name="EnemySelection" type="VBoxContainer" parent="UI"]
 unique_name_in_owner = true
 visible = false
@@ -120,16 +126,12 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(20, 0)
 
 [node name="Announcement" type="Label" parent="UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -264.0
-offset_top = 140.0
-offset_right = 264.0
-offset_bottom = 168.0
-grow_horizontal = 2
+unique_name_in_owner = true
+offset_left = 323.0
+offset_top = 137.0
+offset_right = 851.0
+offset_bottom = 165.0
 scale = Vector2(0.992062, 0.987069)
-pivot_offset = Vector2(264, 0)
 theme_override_font_sizes/font_size = 20
 text = "Eliminate ALL enemies without sacrificing ANY players."
 
@@ -167,3 +169,4 @@ script = ExtResource("1_6wi2a")
 character = ExtResource("6_u62cd")
 
 [connection signal="pressed" from="UI/Options/Attack" to="UI/Options/Attack" method="_on_pressed"]
+[connection signal="pressed" from="UI/Options/Haste" to="UI/Options/Haste" method="_on_pressed"]

@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://cuna0u7rxwm06"]
+[gd_resource type="Resource" script_class="Character" load_steps=7 format=3 uid="uid://cuna0u7rxwm06"]
 
 [ext_resource type="Texture2D" uid="uid://cj314kvrlv1xs" path="res://Assets/Players/Blue/blueFight.png" id="1_dvhrt"]
+[ext_resource type="Texture2D" uid="uid://dobl2l6redtgn" path="res://Assets/Players/Blue/blueAttacking.png" id="1_nuese"]
+[ext_resource type="Texture2D" uid="uid://b8yj5a7xa6pav" path="res://Assets/Players/Blue/BlueDead.png" id="2_k18u5"]
 [ext_resource type="Texture2D" uid="uid://dp64neh1ytakw" path="res://Assets/Players/Blue/blueIcon.png" id="2_wa663"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="3_cpduq"]
+[ext_resource type="PackedScene" uid="uid://clrqpdndwtku5" path="res://Scenes/vfx.tscn" id="4_1p0ah"]
 
 [resource]
 script = ExtResource("3_cpduq")
@@ -10,7 +13,10 @@ title = "Blue"
 type = "Player"
 icon = ExtResource("2_wa663")
 fight = ExtResource("1_dvhrt")
+attacking = ExtResource("1_nuese")
+dead = ExtResource("2_k18u5")
 agility = 17
-health = 0
+health = 50
 mana = 0
-stamina = 0
+shield = 0
+vfx_node = ExtResource("4_1p0ah")

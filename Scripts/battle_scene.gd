@@ -74,9 +74,13 @@ func attack():
 func next_attack():
 	if sorted_array[0]["character"] in players:
 		return
+	var playerHit = players.pick_random()
+	update_announcement(playerHit.title)
+
 	attack()
 	pop_out()
-	players.pick_random().get_attacked()
+	playerHit.get_attacked()
+	
 #
 func set_status(status_type):
 	sorted_array[0]["character"].set_status(status_type)
@@ -90,3 +94,7 @@ func show_options():
 func choose_enemy():
 	%EnemySelection.show()
 	%EnemySelection.get_child(0).grab_focus()
+
+func update_announcement(defender):
+	var attacker = sorted_array[0]["character"].title
+	%Announcement.text = str(attacker) + " attacked " + str(defender)
