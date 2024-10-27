@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://duwfsfkvuii6"]
+[gd_scene load_steps=22 format=3 uid="uid://duwfsfkvuii6"]
 
 [ext_resource type="Script" path="res://Scripts/characterSprite.gd" id="1_6wi2a"]
 [ext_resource type="Script" path="res://Scripts/battle_scene.gd" id="1_oby22"]
@@ -7,12 +7,21 @@
 [ext_resource type="Resource" uid="uid://dq571dx5stqdd" path="res://Resources/Red.tres" id="3_5xjff"]
 [ext_resource type="PackedScene" uid="uid://cyqavs8rppsjs" path="res://Scenes/player_button.tscn" id="3_83cox"]
 [ext_resource type="Resource" uid="uid://cuna0u7rxwm06" path="res://Resources/Blue.tres" id="4_0t88b"]
+[ext_resource type="Script" path="res://Scripts/restartBtn.gd" id="5_4ul8p"]
 [ext_resource type="Resource" uid="uid://dn6tfxue77qsx" path="res://Resources/King.tres" id="5_54p65"]
 [ext_resource type="Script" path="res://Scripts/haste.gd" id="5_l44r5"]
 [ext_resource type="Script" path="res://Scripts/heal.gd" id="6_0v52m"]
 [ext_resource type="Resource" uid="uid://0i41ujftm4ku" path="res://Resources/Ninja.tres" id="6_u62cd"]
+[ext_resource type="Script" path="res://Scripts/fire.gd" id="8_y4v4c"]
 [ext_resource type="Texture2D" uid="uid://cbfe5807vpy0" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
+[ext_resource type="Script" path="res://Scripts/shield.gd" id="9_kcsfy"]
+[ext_resource type="Script" path="res://Scripts/enemy_selection.gd" id="9_pwagk"]
+[ext_resource type="Script" path="res://Scripts/PlayerSelectAction.gd" id="9_sjpmj"]
 [ext_resource type="PackedScene" uid="uid://vlbo2larrbvd" path="res://health_bar.tscn" id="10_ckf4r"]
+[ext_resource type="Texture2D" uid="uid://c26wmlcp1b6bl" path="res://Assets/VFX/shieldIcon.png" id="15_4f4f0"]
+[ext_resource type="Texture2D" uid="uid://cevi68g5lerii" path="res://Assets/VFX/emptySlot.png" id="18_4b4y5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hooe"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "options")]
 position = Vector2(-6, -78)
@@ -30,6 +39,38 @@ scale = Vector2(1.46, 1.315)
 texture = ExtResource("9_h67cr")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+visible = false
+z_index = 10
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 207.0
+offset_right = 198.0
+offset_bottom = 607.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2hooe")
+
+[node name="Button" type="Button" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 194.0
+offset_right = 187.0
+offset_bottom = 225.0
+scale = Vector2(2.465, 2.465)
+text = "restart"
+script = ExtResource("5_4ul8p")
+
+[node name="Label" type="Label" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 88.0
+offset_right = 287.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 50
+text = "Victory"
 
 [node name="Timeline" type="HBoxContainer" parent="UI"]
 anchors_preset = 5
@@ -117,6 +158,17 @@ layout_mode = 2
 text = "Heal"
 script = ExtResource("6_0v52m")
 
+[node name="Fire" type="Button" parent="UI/Options"]
+layout_mode = 2
+text = "Fire"
+script = ExtResource("8_y4v4c")
+
+[node name="Shield" type="Button" parent="UI/Options"]
+layout_mode = 2
+text = "Shield
+"
+script = ExtResource("9_kcsfy")
+
 [node name="EnemySelection" type="VBoxContainer" parent="UI"]
 unique_name_in_owner = true
 visible = false
@@ -133,6 +185,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 pivot_offset = Vector2(20, 0)
+script = ExtResource("9_pwagk")
 
 [node name="PlayerSelction" type="VBoxContainer" parent="UI"]
 unique_name_in_owner = true
@@ -150,6 +203,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 pivot_offset = Vector2(20, 0)
+script = ExtResource("9_sjpmj")
 
 [node name="Announcement" type="Label" parent="UI"]
 unique_name_in_owner = true
@@ -173,6 +227,12 @@ character = ExtResource("3_5xjff")
 
 [node name="HealthBar" parent="Players/Player" instance=ExtResource("10_ckf4r")]
 
+[node name="Shield" type="Sprite2D" parent="Players/Player"]
+visible = false
+position = Vector2(-0.250031, 28.4167)
+scale = Vector2(0.598958, 0.661459)
+texture = ExtResource("15_4f4f0")
+
 [node name="Player2" type="Sprite2D" parent="Players"]
 position = Vector2(14.3333, 134.667)
 rotation = -0.0109053
@@ -181,6 +241,13 @@ script = ExtResource("1_6wi2a")
 character = ExtResource("4_0t88b")
 
 [node name="HealthBar" parent="Players/Player2" instance=ExtResource("10_ckf4r")]
+
+[node name="Shield" type="Sprite2D" parent="Players/Player2"]
+visible = false
+position = Vector2(0.980679, 32.3456)
+rotation = 0.0109053
+scale = Vector2(0.599, 0.661)
+texture = ExtResource("15_4f4f0")
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(828, 177)
@@ -195,6 +262,26 @@ character = ExtResource("5_54p65")
 offset_top = 9.0
 offset_bottom = 36.0
 
+[node name="slot1" type="Sprite2D" parent="Enemies/Enemy1"]
+position = Vector2(-59, -79.5)
+texture = ExtResource("18_4b4y5")
+
+[node name="slot2" type="Sprite2D" parent="Enemies/Enemy1"]
+position = Vector2(-24.5, -92.5)
+texture = ExtResource("18_4b4y5")
+
+[node name="slot3" type="Sprite2D" parent="Enemies/Enemy1"]
+position = Vector2(10, -100.5)
+texture = ExtResource("18_4b4y5")
+
+[node name="slot4" type="Sprite2D" parent="Enemies/Enemy1"]
+position = Vector2(44, -91)
+texture = ExtResource("18_4b4y5")
+
+[node name="slot5" type="Sprite2D" parent="Enemies/Enemy1"]
+position = Vector2(75.5, -77)
+texture = ExtResource("18_4b4y5")
+
 [node name="Enemy2" type="Sprite2D" parent="Enemies"]
 position = Vector2(-78, 456)
 scale = Vector2(1.5, 1.5)
@@ -206,6 +293,9 @@ character = ExtResource("6_u62cd")
 offset_top = 14.0
 offset_bottom = 41.0
 
+[connection signal="pressed" from="UI/Panel/Button" to="UI/Panel/Button" method="_on_pressed"]
 [connection signal="pressed" from="UI/Options/Attack" to="UI/Options/Attack" method="_on_pressed"]
 [connection signal="pressed" from="UI/Options/Haste" to="UI/Options/Haste" method="_on_pressed"]
 [connection signal="pressed" from="UI/Options/Heal" to="UI/Options/Heal" method="_on_pressed"]
+[connection signal="pressed" from="UI/Options/Fire" to="UI/Options/Fire" method="_on_pressed"]
+[connection signal="pressed" from="UI/Options/Shield" to="UI/Options/Shield" method="_on_pressed"]

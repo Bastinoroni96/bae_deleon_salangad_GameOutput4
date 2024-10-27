@@ -1,6 +1,8 @@
 extends Button
 
 
+
+
 func _on_pressed() -> void:
-	owner.choose_enemy("Slash")
+	owner.choose_player("Shield")
 	get_parent().hide()

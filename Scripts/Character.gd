@@ -1,4 +1,5 @@
 extends Resource
+
 class_name Character
 
 @export var title : String
@@ -14,10 +15,13 @@ class_name Character
 		queue_reset()
 @export var health : int
 @export var max_health : int = 100  # Set the maximum health
-@export var mana : int
-@export var stamina : int
+@export var shield : int
+@export var cooldown : int
 
 @export var vfx_node : PackedScene = preload("res://Scenes/vfx.tscn")
+
+
+
 var speed: float
 var queue : Array[float]
 var status = 1
@@ -44,7 +48,7 @@ func attack(tree):
 		shift = Vector2(-30,0)
 	else:
 		shift = Vector2(30,0)
-	node.texture = icon
+	node.texture = attacking
 	if node.position.x < node.get_viewport_rect().size.x/2:
 		shift = -shift
 	
@@ -65,19 +69,41 @@ func add_vfx(type : String = ""):
 	if type == "":
 		return
 	vfx.find_child("AnimationPlayer").play(type)
+	
 #
 #
 func get_attacked(type = ""):
+	if CharacterType == 'Player' and shield == 1:
+		shield -= 1
+		await node.get_tree().create_timer(.1).timeout
+		node.hideShield()
+		add_vfx(type)
+		return
+		
 	if type == "Slash":
 		#deal damage between 10 to 20
 		var SlashDamage = 10 + randi() % 11
 		health -= SlashDamage
-	
+
+	elif type == "Fire":
+		#deal damage between 20 to 30
+		var FireDamage = 10 + randi() % 11
+		health -= FireDamage
+		
+	elif type == "Doom":
+		var DoomDamage = 666
+		health -= DoomDamage
+		
 	if (health <= 0) and (CharacterType == 'Player'):
-		print('end game')
 		node.texture = dead
+		node.openMenu("Defeated")
+
+
 	elif (health <= 0) and (CharacterType == 'Enemy'):
 		print('killed enemy')
+		#EventBus.dead_enemy.emit()
+		#node.queue_free()
+		
 		
 	node.updateHealth(health)
 	add_vfx(type)
@@ -92,8 +118,12 @@ func set_status(status_type : String):
 		"Slow":
 			status = 2
 		"Heal":
-			health += 20
+			health = clamp(health + 20, 0, max_health)
 			node.updateHealth(health)
+		"Shield":
+			if shield == 0:
+				shield = 1
+				node.showShield()
 	
 	#print(queue)
 	#for i in range(3):
@@ -103,3 +133,28 @@ func set_status(status_type : String):
 	#for i in range(3):
 		#queue.append(queue[-1] + speed * status)
 	#print(queue)
+func updateCooldown(action):
+	if CharacterType == "Player":
+		if action == 'Fire':
+			cooldown = 3
+		elif action == "Shield":
+			cooldown = 2
+		else:
+			cooldown = clamp( cooldown - 1, 0, 100)
+	else:
+		if action == 'Doom':
+			#but its cooldown is 7 because it subtracts before the attack and 'Doom' attack as well
+			cooldown = 7
+		cooldown = clamp( cooldown - 1, 0, 100)
+		#print(title, cooldown)
+
+# just for the 'King' enemy
+func updateMoon():
+	node.occupySlot(cooldown - 1)
+
+func resetMoon():
+	for i in range(0,5):
+		node.emptyASlot(i)
+	
+
+	
