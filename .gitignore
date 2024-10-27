@@ -1,0 +1,30 @@
+# Godot 4+ specific ignores
+
+# Directories for temporary and compiled files
+*.import/
+.godot/
+.mono/
+.vs/
+
+# Platform-specific builds and temp files
+/android/
+.ios/
+.windows/
+.mac/
+.linux/
+
+# Exported builds
+export_presets.cfg
+export_presets.cfg.gen
+*.exe
+*.apk
+*.pck
+*.zip
+*.tar.gz
+
+# Backup and autosave files
+*.tmp
+*.save
+*.cfg
+*.old
+*.import
