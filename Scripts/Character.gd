@@ -63,7 +63,6 @@ func add_vfx(type : String = ""):
 	node.add_child(vfx)
 	if type == "":
 		return
-	print(type)
 	vfx.find_child("AnimationPlayer").play(type)
 #
 #
@@ -79,10 +78,10 @@ func set_status(status_type : String):
 		"Slow":
 			status = 2
 	
-	print(queue)
-	for i in range(3):
-		queue.pop_back()
-	print(queue)
-	for i in range(3):
-		queue.append(queue[-1] + speed * status)
-	print(queue)
+	#print(queue)
+	#for i in range(3):
+		#queue.pop_back()
+	#print(queue)
+	#for i in range(3):
+		#queue.append(queue[-1] + speed * status)
+	#print(queue)

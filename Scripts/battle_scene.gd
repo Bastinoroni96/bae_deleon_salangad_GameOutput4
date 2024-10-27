@@ -76,7 +76,7 @@ func next_attack():
 		return
 	var playerHit = players.pick_random()
 	update_announcement(playerHit.title)
-
+	print('asd')
 	attack()
 	pop_out()
 	playerHit.get_attacked()
