@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cvhwiu6tgedcf"]
+[gd_scene load_steps=10 format=3 uid="uid://cvhwiu6tgedcf"]
 
 [ext_resource type="Script" path="res://Scripts/characterSprite.gd" id="1_6wi2a"]
 [ext_resource type="Script" path="res://Scripts/battle_scene.gd" id="1_oby22"]
@@ -8,8 +8,10 @@
 [ext_resource type="Resource" uid="uid://cuna0u7rxwm06" path="res://Resources/Blue.tres" id="4_0t88b"]
 [ext_resource type="Resource" uid="uid://dn6tfxue77qsx" path="res://Resources/King.tres" id="5_54p65"]
 [ext_resource type="Resource" uid="uid://0i41ujftm4ku" path="res://Resources/Ninja.tres" id="6_u62cd"]
+[ext_resource type="Texture2D" uid="uid://cbfe5807vpy0" path="res://Assets/Background/grid_bg.png" id="9_h67cr"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "options")]
+position = Vector2(-6, -78)
 script = ExtResource("1_oby22")
 player_group = NodePath("Players")
 enemy_group = NodePath("Enemies")
@@ -17,12 +19,24 @@ timeline = NodePath("UI/Timeline")
 options = NodePath("UI/Options")
 enemy_button = ExtResource("2_owy2f")
 
+[node name="GridBg" type="Sprite2D" parent="."]
+position = Vector2(582, 365)
+scale = Vector2(1.46, 1.315)
+texture = ExtResource("9_h67cr")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Timeline" type="HBoxContainer" parent="UI"]
-offset_right = 172.0
-offset_bottom = 40.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.0
+offset_top = 30.0
+offset_right = 86.0
+offset_bottom = 70.0
+grow_horizontal = 2
 scale = Vector2(2, 2)
+pivot_offset = Vector2(86, 0)
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
@@ -79,6 +93,8 @@ offset_right = 29.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(29, 0)
 size_flags_horizontal = 4
 
 [node name="Attack" type="Button" parent="UI/Options"]
@@ -100,19 +116,35 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(20, 0)
+
+[node name="Announcement" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = 140.0
+offset_right = 264.0
+offset_bottom = 168.0
+grow_horizontal = 2
+scale = Vector2(0.992062, 0.987069)
+pivot_offset = Vector2(264, 0)
+theme_override_font_sizes/font_size = 20
+text = "Eliminate ALL enemies without sacrificing ANY players."
 
 [node name="Players" type="Node2D" parent="."]
 position = Vector2(289, 156)
 scale = Vector2(3, 3)
 
 [node name="Player" type="Sprite2D" parent="Players"]
-position = Vector2(-52, 19)
+position = Vector2(-35.3333, 148)
 flip_h = true
 script = ExtResource("1_6wi2a")
 character = ExtResource("3_5xjff")
 
 [node name="Player2" type="Sprite2D" parent="Players"]
-position = Vector2(-28.6667, 60.3333)
+position = Vector2(14.3333, 134.667)
 rotation = -0.0109053
 flip_h = true
 script = ExtResource("1_6wi2a")
@@ -122,13 +154,13 @@ character = ExtResource("4_0t88b")
 position = Vector2(828, 177)
 
 [node name="Enemy1" type="Sprite2D" parent="Enemies"]
-position = Vector2(143, 130)
+position = Vector2(124, 349)
 scale = Vector2(2, 2)
 script = ExtResource("1_6wi2a")
 character = ExtResource("5_54p65")
 
 [node name="Enemy2" type="Sprite2D" parent="Enemies"]
-position = Vector2(-51, 279)
+position = Vector2(-78, 456)
 scale = Vector2(1.5, 1.5)
 flip_h = true
 script = ExtResource("1_6wi2a")
