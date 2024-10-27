@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://dn6tfxue77qsx"]
+
+[ext_resource type="Texture2D" uid="uid://b5i4bvylktx4m" path="res://Assets/Enemies/King/World01_004_WailingPrince.png" id="1_n0lww"]
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="2_ogrtb"]
+
+[resource]
+script = ExtResource("2_ogrtb")
+title = "King"
+type = "Enemy"
+icon = ExtResource("1_n0lww")
+fight = ExtResource("1_n0lww")
+agility = 12
+health = 50
+mana = 0
+stamina = 0

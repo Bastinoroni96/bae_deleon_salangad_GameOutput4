@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://dq571dx5stqdd"]
+
+[ext_resource type="Texture2D" uid="uid://dtosr36x6rrxm" path="res://Assets/Players/Red/redFight.png" id="1_lf1ld"]
+[ext_resource type="Texture2D" uid="uid://vhpgmrxnf03b" path="res://Assets/Players/Red/redIcon.png" id="2_k6u77"]
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="3_u344c"]
+
+[resource]
+script = ExtResource("3_u344c")
+title = "Red"
+type = "Player"
+icon = ExtResource("2_k6u77")
+fight = ExtResource("1_lf1ld")
+agility = 12
+health = 0
+mana = 0
+stamina = 0
